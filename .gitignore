@@ -1,0 +1,6 @@
+#PyCharm files
+.idea/
+__pycache__/
+
+#secrets data
+secrets_data.json
