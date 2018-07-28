@@ -78,7 +78,7 @@ class ArchiveWidget(QtWidgets.QMainWindow):
     def _create_tree_zip(self, root_node, root_name, info_list, file_dict):
         for zipInfo in info_list:
             if zipInfo not in file_dict.values():
-                if isdirzipinfo(zipInfo):
+                if is_dir_zipinfo(zipInfo):
                     if zipInfo.filename.startswith(root_name):
                         count_files = len([info for info in info_list if info.filename.startswith(zipInfo.filename)
                                            and info.filename != zipInfo.filename])
@@ -253,7 +253,7 @@ class ArchiveWidget(QtWidgets.QMainWindow):
 
         list_info = list()
         if zipfile.is_zipfile(self.path):
-            if isdirzipinfo(info_root):
+            if is_dir_zipinfo(info_root):
                 list_info = [info for info in self.file_dict.values() if info.filename.startswith(info_root.filename)]
             else:
                 list_info.append(info_root)
@@ -298,16 +298,6 @@ class ArchiveWidget(QtWidgets.QMainWindow):
         self.files_tree.expanded.connect(self.align)
 
 
-def isdirzipinfo(zipInfo):
+def is_dir_zipinfo(zipInfo):
     return ((zipInfo.external_attr & 0xff) & 0x10) != 0
 
-
-if __name__ == '__main__':
-    import sys
-
-    app = QApplication(sys.argv)
-
-    widget = ArchiveWidget('C:/Users/PMazur/Python/untitled.zip')
-    widget.show()
-
-    sys.exit(app.exec_())
