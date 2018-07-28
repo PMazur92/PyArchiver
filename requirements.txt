@@ -1,0 +1,5 @@
+sip
+pyqt5
+google-api-python-client
+dropbox==2.2.0
+oauth2client
